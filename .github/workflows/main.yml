@@ -2,9 +2,9 @@ name: CI/CD for Java Project with Docker
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master1 ]
   pull_request:
-    branches: [ main ]
+    branches: [ master1 ]
 
 jobs:
   build:
