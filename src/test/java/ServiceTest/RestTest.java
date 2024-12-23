@@ -6,6 +6,7 @@ import api.models.User;
 
 import io.restassured.response.Response;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -81,7 +82,7 @@ public class RestTest {
     @ValueSource(strings = {"asdasd"})
     public void unSuccessDeleteUser(String id) {
         Response response = reqresSteps.unSuccessDeleteUser(id);
-
+        Assertions.assertEquals(400, response.statusCode());
     }
 
     /**
@@ -103,6 +104,6 @@ public class RestTest {
     public void unSuccessUpdatePutUser() {
         CreateUserPayload payload = new CreateUserPayload("", "");
         Response response = reqresSteps.unSuccessPutUser(payload);
-
+        Assertions.assertEquals(400, response.statusCode());
     }
 }

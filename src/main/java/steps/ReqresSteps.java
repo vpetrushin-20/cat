@@ -116,7 +116,7 @@ public class ReqresSteps {
                 .when()
                 .delete(String.format("users/%s", id))
                 .then()
-                .spec(SpecHelper.getResponseSpec(204))
+                .log().all()
                 .extract().response();
 
     }
@@ -150,7 +150,7 @@ public class ReqresSteps {
                 .body(payload)
                 .put("users/2")
                 .then()
-                .spec(SpecHelper.getResponseSpec(200))
+                .log().all()
                 .extract().response();
     }
 
