@@ -1,7 +1,9 @@
 name: Run tests
 
 on:
-  push
+  schedule:
+    - cron: '22 20 * * *'
+
 
 jobs:
   run_tests:

@@ -1,8 +1,8 @@
 name: Run tests
 
 on:
-  push
-
+  schedule:
+     - cron: '0 0 * * *'  # Запуск в 00:00 каждый день
 jobs:
   run_tests:
     runs-on: ubuntu-latest

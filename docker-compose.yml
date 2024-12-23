@@ -1,0 +1,48 @@
+version: '3'
+services:
+  # Имя и базовый образ контейнера
+  maven-build:
+    image: maven:3.8.4-jdk-11-slim
+    # Копирование файлов из хост-системы в контейнер
+    volumes:
+      - type: bind
+        source: ./src
+        target: /app/src
+      - type: bind
+        source: ./pom.xml
+        target: /app/pom.xml
+    # Установка зависимостей и сборка проекта
+    working_dir: /app
+    command: mvn -B clean package
+    # Вывод логов сборки
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+
+  # Запуск автотестов
+  maven-test:
+    image: maven:3.8.4-jdk-11-slim
+    volumes:
+      - type: bind
+        source: ./src
+        target: /app/src
+      - type: bind
+        source: ./pom.xml
+        target: /app/pom.xml
+    working_dir: /app
+    command: mvn test
+    depends_on:
+      - maven-build
+
+  # Сервис для хранения собранных артефактов
+
+
+volumes:
+  # Создание тома для хранения собранных артефактов
+  target-volume:
+
+networks:
+  # Сеть для взаимодействия между контейнерами
+  maven-network:
+    driver: bridge
